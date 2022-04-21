@@ -2,6 +2,7 @@ use yew::prelude::*;
 
 enum Msg {
     AddOne,
+    Squaring,
 }
 
 struct Model {
@@ -25,6 +26,10 @@ impl Component for Model {
                 // the value has changed so we need to
                 // re-render for it to appear on the page
                 true
+            },
+            Msg::Squaring => {
+                self.value = self.value * self.value;
+                true
             }
         }
     }
@@ -35,6 +40,7 @@ impl Component for Model {
         html! {
             <div>
                 <button onclick={link.callback(|_| Msg::AddOne)}>{ "+1" }</button>
+                <button onclick={link.callback(|_| Msg::Squaring)}>{ "**2" }</button>
                 <p>{ self.value }</p>
             </div>
         }
